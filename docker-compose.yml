@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  backend:
+    build: ./onlinegrocerybackend
+    container_name: grocery-backend
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./onlinegrocerybackend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=production
+
+  frontend:
+    build: ./onlinegroceryfrontend_full
+    container_name: grocery-frontend
+    ports:
+      - "3001:80"
+    depends_on:
+      - backend
